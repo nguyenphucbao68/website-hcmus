@@ -62,20 +62,6 @@ jobs:
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
 
-      # - uses: azure/setup-kubectl@v1
-      #   id: install
-
-      # - name: Save DigitalOcean kubeconfig
-      #   run: doctl kubernetes cluster kubeconfig save ${{ secrets.DO_CLUSTER_ID }}
-      # echo "${{ secrets.KUBECONFIG }}" > config.yaml
-      # export KUBECONFIG=${PWD}/config.yaml
-      # - name: Deploy
-      #   run: |
-      #     echo "${{ secrets.KUBECONFIG }}" > config.yaml
-      #     export KUBECONFIG=${PWD}/config.yaml
-      #     kubectl rollout restart deployment/athoni-api
-      #     kubectl wait --for=condition=available --timeout=600s deployment/athoni-api
-
       - name: Configure SSH
         uses: webfactory/ssh-agent@v0.5.0
         with:
