@@ -34,10 +34,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.inputs.deployTarget }}
-          path: backend
 
       - name: Build image
         run: DOCKER_BUILDKIT=1 docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
+        working-directory: backend
 
       - name: Log in to registry
         # This is where you will update the PAT to GITHUB_TOKEN
