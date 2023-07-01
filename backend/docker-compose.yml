@@ -5,7 +5,7 @@ services:
     build: .
     image: vexere-backend
     environment:
-      - DATABASE_URL=postgres://nguyenphucbao098:RK3Y5MVxTruW@ep-sparkling-bonus-842154.ap-southeast-1.aws.neon.tech/neondb
+      - DATABASE_URL=postgres://vexere_s1hd_user:NawuFIaDontBMzRiJNEm3h77j4Lmjfum@dpg-chlg2467avj217cctqn0-a.singapore-postgres.render.com/vexere_s1hd
       - PORT=3000
       - JWT_SECRET=thisisasamplesecret
       - JWT_ACCESS_EXPIRATION_MINUTES=30
