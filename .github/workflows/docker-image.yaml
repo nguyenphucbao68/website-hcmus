@@ -15,7 +15,7 @@ on:
       deployTarget:
         description: 'Deploy to production with target'
         required: true
-        default: 'master'
+        default: 'main'
 
 env:
   IMAGE_NAME: website-hcmus
@@ -34,10 +34,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.inputs.deployTarget }}
-
-      # check out to backend folder
-      - name: Checkout to backend folder
-        run: cd backend
+          path: backend
 
       - name: Build image
         run: DOCKER_BUILDKIT=1 docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
