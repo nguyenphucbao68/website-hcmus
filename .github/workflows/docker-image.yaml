@@ -66,6 +66,7 @@ jobs:
 
       - name: Copy Docker image to EC2 instance
         run: scp -o StrictHostKeyChecking=no -r ./docker-compose.yml admin@${{ secrets.EC2_HOST }}:/home/admin/docker-compose.yml
+        working-directory: backend
 
       - name: SSH into EC2 instance and deploy
         run: ssh -o StrictHostKeyChecking=no admin@${{ secrets.EC2_HOST }} "docker-compose up -d"
