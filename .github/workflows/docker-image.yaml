@@ -69,5 +69,5 @@ jobs:
         working-directory: backend
 
       - name: SSH into EC2 instance and deploy
-        run: ssh -o StrictHostKeyChecking=no admin@${{ secrets.EC2_HOST }} "sudo docker-compose up -d"
+        run: ssh -o StrictHostKeyChecking=no admin@${{ secrets.EC2_HOST }} "sudo docker pull ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME && sudo docker-compose up -d"
         working-directory: backend
