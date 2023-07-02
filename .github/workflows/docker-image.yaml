@@ -15,10 +15,10 @@ on:
       deployTarget:
         description: 'Deploy to production with target'
         required: true
-        default: 'master'
+        default: 'main'
 
 env:
-  IMAGE_NAME: website-hcmus
+  IMAGE_NAME: vexere-backend
 
 jobs:
   # Push image to GitHub Packages.
@@ -35,12 +35,9 @@ jobs:
         with:
           ref: ${{ github.event.inputs.deployTarget }}
 
-      # check out to backend folder
-      - name: Checkout to backend folder
-        run: cd backend
-
       - name: Build image
         run: DOCKER_BUILDKIT=1 docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
+        working-directory: backend
 
       - name: Log in to registry
         # This is where you will update the PAT to GITHUB_TOKEN
@@ -68,7 +65,21 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Copy Docker image to EC2 instance
-        run: scp -o StrictHostKeyChecking=no -r ./docker-compose.yml admin@${{ env.EC2_HOST }}:/home/admin/docker-compose.yml
+        run: scp -o StrictHostKeyChecking=no -r ./docker-compose.prod.yml admin@${{ secrets.EC2_HOST }}:/home/admin/docker-compose.yml
+        working-directory: backend
 
       - name: SSH into EC2 instance and deploy
-        run: ssh -o StrictHostKeyChecking=no admin@${{ env.EC2_HOST }} "docker-compose up -d"
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          ssh -o StrictHostKeyChecking=no admin@${{ secrets.EC2_HOST }} "sudo docker pull $IMAGE_ID:$VERSION && sudo docker-compose up -d"
+        working-directory: backend
