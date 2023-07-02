@@ -65,9 +65,9 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Copy Docker image to EC2 instance
-        run: scp -o StrictHostKeyChecking=no -r ./docker-compose.yml admin@${{ secrets.EC2_HOST }}:/home/admin/docker-compose.yml
+        run: scp -o StrictHostKeyChecking=no -r ./docker-compose.prod.yml admin@${{ secrets.EC2_HOST }}:/home/admin/docker-compose.yml
         working-directory: backend
 
       - name: SSH into EC2 instance and deploy
-        run: ssh -o StrictHostKeyChecking=no admin@${{ secrets.EC2_HOST }} "sudo docker-compose up -d"
+        run: ssh -o StrictHostKeyChecking=no admin@${{ secrets.EC2_HOST }} "sudo docker-compose -f docker-compose.prod.yml up -d"
         working-directory: backend
