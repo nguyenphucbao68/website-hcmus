@@ -81,5 +81,5 @@ jobs:
           [ "$VERSION" == "master" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-          ssh -o StrictHostKeyChecking=no admin@${{ secrets.EC2_HOST }} "sudo docker pull $IMAGE_ID:$VERSION && sudo docker-compose up -d"
+          ssh -o StrictHostKeyChecking=no admin@${{ secrets.EC2_HOST }} "sudo docker pull $IMAGE_ID:$VERSION && sudo docker compose up -d"
         working-directory: backend
