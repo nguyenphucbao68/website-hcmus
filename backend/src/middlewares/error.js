@@ -5,8 +5,6 @@ const logger = require('../config/logger');
 const ApiError = require('../utils/ApiError');
 
 const errorConverter = (err, req, res, next) => {
-  console.log('test 2');
-
   let error = err;
   if (!(error instanceof ApiError)) {
     const statusCode =

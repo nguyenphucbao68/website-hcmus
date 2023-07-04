@@ -7,40 +7,106 @@ const password = 'password1';
 const salt = bcrypt.genSaltSync(8);
 const hashedPassword = bcrypt.hashSync(password, salt);
 
+// const userOne = {
+//   _id: mongoose.Types.ObjectId(),
+//   name: faker.name.findName(),
+//   email: faker.internet.email().toLowerCase(),
+//   password,
+//   role: 'user',
+//   isEmailVerified: false,
+// };
+
+// const userTwo = {
+//   _id: mongoose.Types.ObjectId(),
+//   name: faker.name.findName(),
+//   email: faker.internet.email().toLowerCase(),
+//   password,
+//   role: 'user',
+//   isEmailVerified: false,
+// };
+
+// const admin = {
+//   _id: mongoose.Types.ObjectId(),
+//   name: faker.name.findName(),
+//   email: faker.internet.email().toLowerCase(),
+//   password,
+//   role: 'admin',
+//   isEmailVerified: false,
+// };
+
+// const insertUsers = async (users) => {
+//   await User.insertMany(users.map((user) => ({ ...user, password: hashedPassword })));
+// };
+
+const adminOne = {
+  id: 'c118f693-8722-4461-a79d-d76991b96a9e',
+  email: 'nguyenphucbao68@gmail.com',
+  role: 0,
+  password: Buffer.from('$2a$10$uR5S.P86tXoBfCHl0a03bePKyN/1yE/1oCW5oRNs/IYfbDeL.WY9O'),
+  create_time: '2022-03-22T12:26:44.480Z',
+  update_time: '2022-08-27T14:43:55.772Z',
+};
+
+const adminTwo = {
+  id: 'c118f693-8722-4461-a79d-d76991b96bcd',
+  email: 'khanhndq2002@gmail.com',
+  role: 0,
+  password: Buffer.from('$2a$10$uR5S.P86tXoBfCHl0a03bePKyN/1yE/1oCW5oRNs/IYfbDeL.WY9O'),
+  create_time: '2022-03-22T12:26:44.480Z',
+  update_time: '2022-08-27T14:43:55.772Z',
+};
+
+const busOpOne = {
+  id: 'c118f693-8722-4461-a79d-d76991b96afd',
+  email: 'busop1@gmail.com',
+  role: 1,
+  password: Buffer.from('$2a$10$uR5S.P86tXoBfCHl0a03bePKyN/1yE/1oCW5oRNs/IYfbDeL.WY9O'),
+  create_time: '2022-03-22T12:26:44.480Z',
+  update_time: '2022-08-27T14:43:55.772Z',
+};
+
+const busOpTwo = {
+  id: 'c118f693-8722-4461-a79d-d76991b96acf',
+  email: 'busop2@gmail.com',
+  role: 1,
+  password: Buffer.from('$2a$10$uR5S.P86tXoBfCHl0a03bePKyN/1yE/1oCW5oRNs/IYfbDeL.WY9O'),
+  create_time: '2022-03-22T12:26:44.480Z',
+  update_time: '2022-08-27T14:43:55.772Z',
+};
+
 const userOne = {
-  _id: mongoose.Types.ObjectId(),
-  name: faker.name.findName(),
-  email: faker.internet.email().toLowerCase(),
-  password,
-  role: 'user',
-  isEmailVerified: false,
+  id: 'c118f693-8722-4461-a79d-d76991b96fdf',
+  email: 'user1@gmail.com',
+  role: 2,
+  password: Buffer.from('$2a$10$uR5S.P86tXoBfCHl0a03bePKyN/1yE/1oCW5oRNs/IYfbDeL.WY9O'),
+  create_time: '2022-03-22T12:26:44.480Z',
+  update_time: '2022-08-27T14:43:55.772Z',
 };
 
 const userTwo = {
-  _id: mongoose.Types.ObjectId(),
-  name: faker.name.findName(),
-  email: faker.internet.email().toLowerCase(),
-  password,
-  role: 'user',
-  isEmailVerified: false,
+  id: 'c118f693-8722-4461-a79d-d76991b96abf',
+  email: 'user2@gmail.com',
+  role: 2,
+  password: Buffer.from('$2a$10$uR5S.P86tXoBfCHl0a03bePKyN/1yE/1oCW5oRNs/IYfbDeL.WY9O'),
+  create_time: '2022-03-22T12:26:44.480Z',
+  update_time: '2022-08-27T14:43:55.772Z',
 };
 
-const admin = {
-  _id: mongoose.Types.ObjectId(),
-  name: faker.name.findName(),
+const randomUser = {
+  id: 'c118f693-8722-4461-a79d-d76991b96abf', //
   email: faker.internet.email().toLowerCase(),
   password,
-  role: 'admin',
-  isEmailVerified: false,
-};
-
-const insertUsers = async (users) => {
-  await User.insertMany(users.map((user) => ({ ...user, password: hashedPassword })));
+  role: 2,
+  create_time: '2022-03-22T12:26:44.480Z', //
+  update_time: '2022-08-27T14:43:55.772Z', //
 };
 
 module.exports = {
   userOne,
   userTwo,
-  admin,
-  insertUsers,
+  busOpOne,
+  busOpTwo,
+  adminOne,
+  adminTwo,
+  randomUser,
 };
