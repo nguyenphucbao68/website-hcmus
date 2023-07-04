@@ -16,6 +16,7 @@ jobs:
 
       - name: Move to backend folder
         run: cd backend
+        working-directory: ./backend
 
       - name: List directory contents
         run: ls -la
