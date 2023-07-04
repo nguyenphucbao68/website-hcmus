@@ -14,10 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Move to backend folder
-        run: cd backend
-        working-directory: ./backend
-
       - name: List directory contents
         run: ls -la
 
@@ -34,4 +30,4 @@ jobs:
 
       - name: Run tests
         run: yarn test
-        working-directory: ./backend
+        working-directory: backend
