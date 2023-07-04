@@ -27,6 +27,7 @@ jobs:
 
       - name: Check Jest installation
         run: yarn jest --version
+        working-directory: backend
 
       - name: Run tests
         run: yarn test
