@@ -17,6 +17,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Check Node.js version
+        run: node --version
+
       - name: Run tests
         run: yarn test
         working-directory: ./backend
