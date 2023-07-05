@@ -3,6 +3,13 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 
+/**
+ *
+ * @param {*} schema
+ * Check if the request sent matches the schema.
+ * If error, throw error
+ * Else run next function
+ */
 const validate = (schema) => (req, res, next) => {
   const validSchema = pick(schema, ['params', 'query', 'body']);
   const object = pick(req, Object.keys(validSchema));
