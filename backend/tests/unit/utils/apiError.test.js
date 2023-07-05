@@ -1,4 +1,4 @@
-const ApiError = require('../../../src/utils/apiError');
+const ApiError = require('../../../src/utils/ApiError');
 
 describe('ApiError', () => {
   describe('constructor', () => {
