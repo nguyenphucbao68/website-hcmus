@@ -1,17 +1,27 @@
-const mongoose = require('mongoose');
-const config = require('../../src/config/config');
+const { Sequelize } = require('sequelize');
+
+const sequelize = new Sequelize({
+  dialect: 'postgres',
+  host: 'localhost',
+  port: 5432,
+  username: 'postgres',
+  password: 'localdb',
+  database: 'ticketbooking',
+});
 
 const setupTestDB = () => {
   beforeAll(async () => {
-    await mongoose.connect(config.mongoose.url, config.mongoose.options);
+    await sequelize.authenticate();
   });
 
-  beforeEach(async () => {
-    await Promise.all(Object.values(mongoose.connection.collections).map(async (collection) => collection.deleteMany()));
-  });
+  // beforeEach(async () => {
+  //   // Truncate all tables in the test database and reset data to initial state
+  //   const tableNames = await sequelize.getQueryInterface().showAllTables();
+  //   await Promise.all(tableNames.map((tableName) => sequelize.query(`TRUNCATE TABLE ${tableName} CASCADE;`)));
+  // });
 
   afterAll(async () => {
-    await mongoose.disconnect();
+    await sequelize.close();
   });
 };
 

@@ -79,7 +79,9 @@ const createReview = async (userId, boId, rate, comment) => {
 };
 
 const getBusOperatorById = async (id) => {
-  return prisma.bus_operators.findUnique({ where: { id } });
+  const result = await prisma.bus_operators.findUnique({ where: { id } });
+  console.log({ result });
+  return result;
 };
 
 const listBusOperator = async (req) => {
@@ -139,6 +141,7 @@ const deleteBO = async (req) => {
   });
   return message;
 };
+// Test
 module.exports = {
   deleteBO,
   updateBO,
