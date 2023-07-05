@@ -8,6 +8,7 @@ const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
+console.log(jwtOptions);
 const jwtVerify = async (payload, done) => {
   try {
     // if (payload.type !== tokenTypes.ACCESS) {
